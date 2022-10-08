@@ -1,4 +1,4 @@
-from Player import Player 
+from helper.Player import Player 
 import math 
 
 class Team:

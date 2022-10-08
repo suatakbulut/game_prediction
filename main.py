@@ -1,6 +1,6 @@
-from Player import Player 
-from Team import Team 
-from Game import Game 
+from helper.Player import Player 
+from helper.Team import Team 
+from helper.Game import Game 
 
 p1 = Player("p_a", score = 81)
 p2 = Player("p_b", score = 79)
@@ -8,7 +8,7 @@ p3 = Player("p_c", score = 67)
 p4 = Player("p_d", score = 50)
 p5 = Player("p_e", score = 88)
 p0 = Player("p_f", score = 75)
-p6 = Player(name="Suat", dob="1989", score=89)
+p6 = Player(name="Suat",   dob="1989", score=89)
 p7 = Player(name="Gulsum", dob="1996", score=96) 
 
 players = [p0, p1, p2, p3, p4, p5, p6, p7]

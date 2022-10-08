@@ -1,4 +1,4 @@
-from Team import Team 
+from helper.Team import Team 
 
 class Game:
     def __init__(self, game_details ):  
