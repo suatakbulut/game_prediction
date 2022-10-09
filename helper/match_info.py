@@ -38,22 +38,13 @@ def obtain_game_in_line( line ):
         return Game( {"home" : home, "score" : score, "away" : away, "date" : date} ) 
    
 
-def obtain_games_in_league( league_txt_file ):
-    games = []
+def obtain_games_in_league( league_txt_file , games = []):
     textfile = open(league_txt_file, 'r')
     for line in textfile:
         game = obtain_game_in_line( line ) 
         if game:
             games.append( game )
     textfile.close()
-    print( "\n\n\t\tTEAMS\n")
-    for team in teams.keys():
-        print(team)
-
-    print( "\n\n\t\tGAMES\n")
-    for game in games:
-        print( game )
-    
     return games 
     
 
