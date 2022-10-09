@@ -7,8 +7,8 @@ class Team:
         self.name = name
         self.squad = set()
         self.chemistry_multiplier = chemistry_multiplier
-        self.chemistry = 0
-        self.score = 0
+        self.score = 100
+        self.chemistry = chemistry_multiplier
 
     def __str__(self):
         return f"<name: {self.name} | multiplier: {self.chemistry_multiplier} | chemistry: {self.chemistry}>"
@@ -49,9 +49,9 @@ class Team:
 
     def winning_probability(self, other):
         if self.chemistry > other.chemistry:
-            return 1 - (other.chemistry / self.chemistry)/8
+            return 1 - (other.chemistry / self.chemistry)/2
         else:
-            return (self.chemistry / other.chemistry)/8
+            return (self.chemistry / other.chemistry)/2
 
 
 if __name__ == "__main__":

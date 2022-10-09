@@ -11,7 +11,7 @@ class Game:
         self.true_win_prob = self.get_true_win_prob()
 
     def __str__(self):
-        return f"At {self.date}: {self.home.name} {self.score} {self.away.name}"
+        return f"{self.date}: {self.home.name} {self.score} {self.away.name}"
 
     def get_winner(self):
         h, a = [ int(s) for s in self.score.split("-") ]
