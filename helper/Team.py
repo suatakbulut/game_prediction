@@ -8,7 +8,8 @@ class Team:
         self.squad = set()
         self.chemistry_multiplier = chemistry_multiplier
         self.score = 100
-        self.chemistry = chemistry_multiplier
+        self.chemistry = chemistry_multiplier 
+        self.total_games = 0 
 
     def __str__(self):
         return f"<name: {self.name} | multiplier: {self.chemistry_multiplier} | chemistry: {self.chemistry}>"

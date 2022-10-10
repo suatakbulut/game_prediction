@@ -6,7 +6,8 @@ class Game:
         self.away   = game_details["away"]
         self.score  = game_details["score"]
         self.date   = game_details["date"]
-        
+        self.home.total_games += 1
+        self.away.total_games += 1
         self.expected_win_prob = self.get_expected_win_prob()
         self.true_win_prob = self.get_true_win_prob()
 

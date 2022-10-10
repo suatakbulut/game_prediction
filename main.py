@@ -16,3 +16,9 @@ for country_folder in country_folders:
             games = obtain_games_in_league( league_txt_file, games = games)
 
 print( len(games) )
+game = games[143]
+print(game)
+print( game.true_win_prob) 
+
+print( game.home.name, game.home.total_games )
+print( game.away.name, game.away.total_games )
