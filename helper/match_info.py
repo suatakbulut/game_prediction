@@ -2,6 +2,7 @@ import os
 import re 
 from helper.Game import Game 
 from helper.Team import Team 
+from helper.utils import * 
 
 def get_countries_from_data( data_folder ):
     country_folders = [ f.path for f in os.scandir( data_folder ) if f.is_dir() ]
@@ -27,17 +28,6 @@ def validate_create__team(team_name):
     else: 
         return teams[team_name]
 
-def obtain_game_in_line( line ): 
-    pattern = re.compile("(.*)(\d+\-\d+)(.*)")
-    x = re.match( pattern, line)
-    if x:
-        home = validate_create__team( x.group(1) )
-        away = validate_create__team( x.group(3) )
-        score = x.group(2)
-        date = "2022_10_08" 
-        return Game( {"home" : home, "score" : score, "away" : away, "date" : date} ) 
-   
-
 def obtain_games_in_league( league_txt_file , games = []):
     textfile = open(league_txt_file, 'r')
     for line in textfile:
@@ -45,6 +35,66 @@ def obtain_games_in_league( league_txt_file , games = []):
         if game:
             games.append( game )
     textfile.close()
-    return games 
+    return games
     
 
+def obtain_game_in_line( line, date, matchday, country, season, league ):
+    pattern = re.compile("(.*)(\d+\-\d+)(.*)")
+    x = re.match( pattern, line)
+    if x:
+        home = validate_create__team( x.group(1) )
+        away = validate_create__team( x.group(3) )
+        score = x.group(2)
+
+        return Game(home=home, away=away, score=score, date=date, matchday=matchday , country=country, league=league, season=season )
+
+
+def obtain_date_in_line( line ):
+    pattern = re.compile("\[(.*)\]")
+    x = re.match( pattern, line)
+    if x:
+        return x.group(1)
+
+ 
+def obtain_matchday_in_line( line ):
+    pattern = re.compile("(Matchday|Round)[\s]+(\d+)")
+    x = re.match( pattern, line)
+    if x:
+        return x.group(2)
+
+
+def obtain_games_in_league( league_txt_file, games, country, season, league):
+    date = None
+    matchday = 0
+    game = None
+    textfile = open(league_txt_file, 'r')
+
+    for line in textfile:
+        '''
+        There could be one of the 4:
+        - Empty line : "\n"
+        - game: "  Bolton Wanderers FC      2-2  Blackburn Rovers FC\n"
+        - date: "[Sat Aug/23] \n"
+        - matchday: "Matchday 2\n"
+        '''
+        if not line:
+            pass
+
+        if obtain_matchday_in_line( line ):
+            matchday = obtain_matchday_in_line( line )
+            # print( "Matchday:", matchday)
+
+        elif obtain_date_in_line( line ):
+            date = obtain_date_in_line( line )
+            # print( "Date:", date)
+
+        elif obtain_game_in_line( line, date, matchday, country, season, league ): 
+            formatted_date = format_date(season, date)
+            game = obtain_game_in_line( line, formatted_date, matchday, country, season, league )
+            # print( "Game:", game )
+            games.append( game )
+        # else:
+            # print("Skipping")
+
+    textfile.close()
+    return games
