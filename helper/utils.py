@@ -22,7 +22,7 @@ def format_date(season, date):
     date_str = f"{y} {b} {d}"
     format_data = "%Y %b %d"
     date = datetime.strptime(date_str, format_data)
-    
+
     if a == date.strftime("%a"):
         return date 
     else:
@@ -30,6 +30,10 @@ def format_date(season, date):
         date_str = f"{y} {b} {d}"
         return datetime.strptime(date_str, format_data)
 
+
+def download_data():
+    """ Ignore tracking the data file, instead let the user be able to download the data in the same format """
+    pass 
 
 season = "2003/04"
 date = "[Sat Aug/23]"
